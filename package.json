@@ -1,0 +1,18 @@
+{
+  "name": "stockist",
+  "version": "1.0.0",
+  "description": "Shopping aggregator app",
+  "main": "index.js",
+  "scripts": {
+    "test": "node inde.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.3",
+    "mongoose": "^4.1.3",
+    "async": "0.9.0",
+    "cheerio": "0.17.0",
+    "request": "~2.36.0"
+  }
+}
