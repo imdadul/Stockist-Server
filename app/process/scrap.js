@@ -12,35 +12,35 @@ var tresbien = require('./tresbien');
 var union = require('./union');
 
 var sites = [
-    {
-        name:'RSVP',
-        object:rsvp
-    },
+    //{
+    //    name:'RSVP',
+    //    object:rsvp
+    //},
     {
         name:'END',
         object:end
     },
-    {
-        name:'BODEGA',
-        object:bodega
-    },
-    {
-        name:'TRESBIEN',
-        object:tresbien
-    },
-    {
-        name:'UNION',
-        object:union
-    },
-    {
-        name:'ISM',
-        object:ism
-    },
+    //{
+    //    name:'BODEGA',
+    //    object:bodega
+    //},
+    //{
+    //    name:'TRESBIEN',
+    //    object:tresbien
+    //},
+    //{
+    //    name:'UNION',
+    //    object:union
+    //},
+    //{
+    //    name:'ISM',
+    //    object:ism
+    //},
 ]
 
 var stores=[];
 
-Store.find({},function(err,items){
+Store.find({},function(err,items){ // Gets all the store details can be used later.
     items.forEach(function(s){
         stores.push(s);
     })
@@ -72,7 +72,6 @@ async.eachSeries(sites,function(site,callback){
 
         }
         catch(exp){
-
             errorLog += exp + ' in '+ site.name;
             callback();
         }

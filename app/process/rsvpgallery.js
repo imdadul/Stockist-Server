@@ -12,14 +12,14 @@ module.exports = {
         var url = siteUrl+'/collections/new-arrivals';
         var numberOfPages = 3;
         var pageNumbers = [];
-        for(var i =0 ;i<numberOfPages;i++){
+        for(var i =1 ;i<=numberOfPages;i++){
             pageNumbers.push(i);
         }
         var store = 'RSVP';
         var products = [];
         async.forEach(pageNumbers,function(num,loopCallback){
-                url = url+'?page='+num;
-                request(url,function(error,response,html){
+                var cUrl = url+'?page='+num;
+                request(cUrl,function(error,response,html){
                     if(!error){
                         var $ = cheerio.load(html);
                         var children = $('#product-loop').children('div');

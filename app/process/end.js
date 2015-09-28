@@ -12,13 +12,13 @@ module.exports = {
         var url = siteUrl+'/us/latest-products/new-this-week';
         var numberOfPages = 19;
         var pageNumbers = [];
-        for(var i =0 ;i<numberOfPages;i++){
+        for(var i =1 ;i<=numberOfPages;i++){
             pageNumbers.push(i);
         }
         var products = [];
-        async.forEach(pageNumbers,function(num,loopCallback){
-                url = url+'?p='+num;
-                request(url,function(error,response,html){
+        async.eachLimit(pageNumbers,1,function(num,loopCallback){
+                var cUrl = url+'?p='+num;
+                request(cUrl,function(error,response,html){
                     if(!error){
                         var $ = cheerio.load(html);
                         var children = $('.thumbnail');
@@ -26,9 +26,9 @@ module.exports = {
                             var product = {};
                             product.url = $(this).children('a').attr('href');
                             product.imgUrl = $(this).children('a').children('img').attr('src');
-                            product.brand = $(this).children('.product-details').children('a').children('h4').text();
+                            //product.brand = $(this).children('.product-details').children('a').children('h4').text();
                             product.productName = $(this).children('a').attr('title');
-                            product.price = $(this).children('.product-details').children('.price').children('.prod-price').text();
+                            product.price = $(this).children('.price-box').children('.regular-price').children('.price').text();
                             product.price = parseFloat(product.price.replace("$",''));
                             product.store = store;
                             products.push(product);
@@ -50,9 +50,8 @@ module.exports = {
                     request(product.url,function(error,response,html){
                         if(!error){
                             var $ = cheerio.load(html);
-                            var descriptionBox = $('.rte');
-                            product.description = "<div class='p1'>"+ descriptionBox.children('.p1').text() +"</div>";
-                            product.description += "<div class='p2'>"+ descriptionBox.children('.p2').text() +"</div>";
+                            var descriptionBox = $('.std');
+                            product.description = descriptionBox.html();
                             cb();
                         }
                         else {
