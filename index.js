@@ -57,7 +57,7 @@ require('./config/routes')(app)
 app.listen(port);
 console.log('Express app started on port ' + port);
 
-var scrap = require('./app/process/scrap');
+//var scrap = require('./app/process/scrap');
 var startScrapingStores = new CronJob('00 30 3 * * 0-6', function () { // Every day at 4.30 am
         var scrap = require('./app/process/scrap');
     }, function () {
