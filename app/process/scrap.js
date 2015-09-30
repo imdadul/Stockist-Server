@@ -82,11 +82,11 @@ async.eachSeries(sites,function(site,callback){
 
     console.log(err);
     //var fs = require('fs');
-    fs.appendFile("./errorlog.txt", errorLog, function(err) {
-        if(err) {
-            return console.log(err);
-        }
-    });
+    //fs.appendFile("./errorlog.txt", errorLog, function(err) {
+    //    if(err) {
+    //        return console.log(err);
+    //    }
+    //});
     console.log("Done updating");
 
 });
