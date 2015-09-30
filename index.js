@@ -54,7 +54,7 @@ fs.readdirSync(models_path).forEach(function (file) {
 // Start the app by listening on <port>
 var port = 3001;
 require('./config/routes')(app)
-app.listen(port);
+app.listen(process.env.PORT || 5000);
 console.log('Express app started on port ' + port);
 
 //var scrap = require('./app/process/scrap');
