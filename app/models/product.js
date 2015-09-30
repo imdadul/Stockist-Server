@@ -11,7 +11,7 @@ var ProductSchema = new Schema({
     description: {type: String},
     price: {type: Number},
     imgUrl: {type: String},
-    store: {type: Schema.ObjectId, ref: 'store'}
+    store: {type: Schema.ObjectId, ref: 'Store'}
 });
 
 Product = mongoose.model('Product', ProductSchema);

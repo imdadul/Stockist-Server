@@ -7,6 +7,7 @@ var mongoose = require('mongoose')
 
 var StoreSchema = new Schema({
     name: {type: String},
+    fullName: {type: String},
     url: {type: String,required: true, default: ''},
     logoUrl: {type: Number}
 });

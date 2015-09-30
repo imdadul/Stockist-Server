@@ -12,14 +12,14 @@ var tresbien = require('./tresbien');
 var union = require('./union');
 
 var sites = [
-    //{
-    //    name:'RSVP',
-    //    object:rsvp
-    //},
     {
-        name:'END',
-        object:end
+        name:'RSVP',
+        object:rsvp
     },
+    //{
+    //    name:'END',
+    //    object:end
+    //}
     //{
     //    name:'BODEGA',
     //    object:bodega
@@ -59,17 +59,18 @@ async.eachSeries(sites,function(site,callback){
         try{
             if(products[0].store)
                 var store = getStoreBy(products[0].store);
-            async.eachSeries(products,function(p,cb){
-                product =  new Product(p);
-                delete product.store;
-                product.store = store.id;
-                product.save(function (err) {
-                    cb();
-                })
-            },function(err){
-                callback();
-            });
-
+            Product.remove({store:store.id},function(err){
+                async.eachSeries(products,function(p,cb){
+                    product =  new Product(p);
+                    delete product.store;
+                    product.store = store.id;
+                    product.save(function (err) {
+                        cb();
+                    })
+                },function(err){
+                    callback();
+                });
+            })
         }
         catch(exp){
             errorLog += exp + ' in '+ site.name;
@@ -79,7 +80,7 @@ async.eachSeries(sites,function(site,callback){
     });
 },function(err){
 
-    console.log(errorLog);
+    console.log(err);
     //var fs = require('fs');
     fs.appendFile("./errorlog.txt", errorLog, function(err) {
         if(err) {

@@ -17,7 +17,7 @@ module.exports = {
         }
         var store = 'RSVP';
         var products = [];
-        async.forEach(pageNumbers,function(num,loopCallback){
+        async.eachSeries(pageNumbers,function(num,loopCallback){
                 var cUrl = url+'?page='+num;
                 request(cUrl,function(error,response,html){
                     if(!error){
@@ -30,7 +30,9 @@ module.exports = {
                             product.brand = $(this).children('.product-details').children('a').children('h4').text();
                             product.productName = $(this).children('.product-details').children('a').children('h3').text();
                             product.price = $(this).children('.product-details').children('.price').children('.prod-price').text();
-                            product.price = parseFloat(product.price.replace("$",''));
+                            product.price=product.price.replace(",",'');
+                            product.price=product.price.replace("$",'');
+                            product.price = parseFloat(product.price);
                             product.store = store;
                             products.push(product);
                         });

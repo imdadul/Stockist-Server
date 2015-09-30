@@ -10,31 +10,49 @@ module.exports = {
         var store = 'END';
         var siteUrl = 'http://www.endclothing.com';
         var url = siteUrl+'/us/latest-products/new-this-week';
-        var numberOfPages = 19;
+        var numberOfPages = 5; // In reality there are 19 pages, we will take only 5 pages of it.
         var pageNumbers = [];
         for(var i =1 ;i<=numberOfPages;i++){
             pageNumbers.push(i);
         }
         var products = [];
-        async.eachLimit(pageNumbers,1,function(num,loopCallback){
+        var brands = [];
+
+        var getBrandName = function(str){
+            for(var i=0;i<brands.length;i++){
+                var patt = new RegExp(brands[i]);
+                var isMatched = patt.test(str);
+                if(isMatched){
+                    return brands[i];
+                }
+            }
+        };
+        async.eachSeries(pageNumbers,function(num,loopCallback){
                 var cUrl = url+'?p='+num;
                 request(cUrl,function(error,response,html){
                     if(!error){
                         var $ = cheerio.load(html);
                         var children = $('.thumbnail');
+                        if(brands.length==0){
+                            var branNameElm = $('#fme_layered_brand ol li').children('a');
+                            branNameElm.each(function(){
+                                brands.push($(this).text());
+                            })
+                        }
                         children.each(function(){
                             var product = {};
                             product.url = $(this).children('a').attr('href');
                             product.imgUrl = $(this).children('a').children('img').attr('src');
-                            //product.brand = $(this).children('.product-details').children('a').children('h4').text();
-                            product.productName = $(this).children('a').attr('title');
+                            var name = $(this).children('a').attr('title');
+                            product.brand = getBrandName(name);
+                            product.productName = name.replace(product.brand,"");
                             product.price = $(this).children('.price-box').children('.regular-price').children('.price').text();
-                            product.price = parseFloat(product.price.replace("$",''));
+                            product.price=product.price.replace(",",'');
+                            product.price=product.price.replace("$",'');
+                            product.price = parseFloat(product.price);
                             product.store = store;
                             products.push(product);
                         });
-                        //if(children.length==0) mainCallback(products);
-                        //else loopCallback();
                         loopCallback();
                     }
                     else {
