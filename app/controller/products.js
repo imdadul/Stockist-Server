@@ -7,7 +7,7 @@
 exports.getLatestProducts = function(req,res) {
     var query = {};
 
-    if( req.body.currentShown !== '' && req.body.currentShown !== undefined){
+    if( req.body.currentShown !== '' && req.body.currentShown !== undefined && req.body.currentShown.length>0){
         params = req.body.currentShown.toString().split(',');
         var tempArr = [];
         for(var i = 0; i < params.length; i++){
@@ -23,6 +23,9 @@ exports.getLatestProducts = function(req,res) {
         .populate({
             path: 'store',
             select: 'name fullName url'
+        })
+        .sort({
+            index: 1 //Sort by Date Added DESC
         })
         .exec(function(err,result){
             if(err){

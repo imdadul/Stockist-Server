@@ -10,6 +10,7 @@ var ProductSchema = new Schema({
     brand: {type: String},
     description: {type: String},
     price: {type: Number},
+    index: {type: Number},
     imgUrl: {type: String},
     store: {type: Schema.ObjectId, ref: 'Store'}
 });

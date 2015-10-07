@@ -54,17 +54,17 @@ fs.readdirSync(models_path).forEach(function (file) {
 // Start the app by listening on <port>
 var port = 3001;
 require('./config/routes')(app)
-app.listen(process.env.PORT || 5000);
+app.listen(process.env.PORT || 3001);
 console.log('Express app started on port ' + port);
 
 //var scrap = require('./app/process/scrap');
-var startScrapingStores = new CronJob('00 30 3 * * 0-6', function () { // Every day at 4.30 am
+var startScrapingStores = new CronJob('00 45 02 * * 0-6', function () { // Every day at 4.30 am
         var scrap = require('./app/process/scrap');
     }, function () {
 
         /* This function is executed when the job stops */
     }
-    //,true /* Start the job right now */
+    ,true /* Start the job right now */
     //timeZone /* Time zone of this job. */
 );
 

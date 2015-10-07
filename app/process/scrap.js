@@ -16,10 +16,10 @@ var sites = [
         name:'RSVP',
         object:rsvp
     },
-    {
-        name:'END',
-        object:end
-    }
+    //{
+    //    name:'END',
+    //    object:end
+    //}
     //{
     //    name:'BODEGA',
     //    object:bodega
@@ -60,11 +60,14 @@ async.eachSeries(sites,function(site,callback){
             if(products[0].store)
                 var store = getStoreBy(products[0].store);
             Product.remove({store:store.id},function(err){
+                var index = 0;
                 async.eachSeries(products,function(p,cb){
                     product =  new Product(p);
                     delete product.store;
                     product.store = store.id;
+                    product.index = index;
                     product.save(function (err) {
+                        index++;
                         cb();
                     })
                 },function(err){
