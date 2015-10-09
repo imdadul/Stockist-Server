@@ -2,11 +2,10 @@
  * Created by Imdadul Huq on 29-Sep-15.
  */
 
-
+var common = require ('../controller/common');
 
 exports.getLatestProducts = function(req,res) {
     var query = {};
-
     if( req.body.currentShown !== '' && req.body.currentShown !== undefined && req.body.currentShown.length>0){
         params = req.body.currentShown.toString().split(',');
         var tempArr = [];
@@ -32,7 +31,7 @@ exports.getLatestProducts = function(req,res) {
                 console.log('Query Error: '+err.message);
             }
             else{
-                res.send(result);
+                res.send(common.setLikePropToProducts(req,result));
             }
         })
 };

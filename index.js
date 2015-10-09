@@ -2,7 +2,14 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser')
 var CronJob = require('cron').CronJob;
+var session = require('express-session')
 
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+    //cookie: {maxAge: 300000}
+}))
 app.use(bodyParser.json())
 
 fs = require('fs'),
