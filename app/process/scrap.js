@@ -16,14 +16,14 @@ var sites = [
         name:'RSVP',
         object:rsvp
     },
-    //{
-    //    name:'END',
-    //    object:end
-    //}
-    //{
-    //    name:'BODEGA',
-    //    object:bodega
-    //},
+    {
+        name:'END',
+        object:end
+    },
+    {
+        name:'BODEGA',
+        object:bodega
+    },
     //{
     //    name:'TRESBIEN',
     //    object:tresbien
