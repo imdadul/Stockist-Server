@@ -74,6 +74,5 @@ var startScrapingStores = new CronJob('00 40 15 * * 0-6', function () { // Every
     ,true /* Start the job right now */
     //timeZone /* Time zone of this job. */
 );
-
 // expose app
 exports = module.exports = app;

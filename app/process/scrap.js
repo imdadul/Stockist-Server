@@ -32,10 +32,10 @@ var sites = [
     //    name:'UNION',
     //    object:union
     //},
-    //{
-    //    name:'ISM',
-    //    object:ism
-    //},
+    {
+        name:'ISM',
+        object:ism
+    },
 ]
 
 var stores=[];
@@ -76,7 +76,8 @@ async.eachSeries(sites,function(site,callback){
             })
         }
         catch(exp){
-            errorLog += exp + ' in '+ site.name;
+            console.log(exp +' in '+ site.name);
+            //errorLog += exp + ' in '+ site.name;
             callback();
         }
 

@@ -6,7 +6,10 @@ var mongoose = require('mongoose')
     , Schema = mongoose.Schema
 
 var UserSchema = new Schema({
-    openAuthID: {type: String},
+    name: {type: String},
+    created: {type: Date,required: true, default: Date.now()},
+    oauthID: {type: Number },
+    provider:{type:String,default:'manual'},
     followingStores: [{type: Schema.ObjectId, ref: 'Store'}],
     favourites:[{type: String}]
 });

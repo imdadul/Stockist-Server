@@ -9,7 +9,7 @@ var ProductSchema = new Schema({
     url: {type: String},
     brand: {type: String},
     description: {type: String},
-    price: {type: Number},
+    price: {type: String},
     index: {type: Number},
     imgUrl: {type: String},
     store: {type: Schema.ObjectId, ref: 'Store'}

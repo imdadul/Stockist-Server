@@ -33,9 +33,10 @@ module.exports = {
                             product.brand = $(this).children('.prod-caption').children('h4').children('a').text();
                             product.productName =  $(this).children('.prod-caption').children('h3').children('a').text().trim();
                             product.price = $(this).children('.prod-caption').children('.prod-price').children('.money').text();
-                            product.price=product.price.replace(",",'');
-                            product.price=product.price.replace("$",'');
-                            product.price = parseFloat(product.price);
+                            product.price = product.price.trim();
+                            //product.price=product.price.replace(",",'');
+                            //product.price=product.price.replace("$",'');
+                            //product.price = parseFloat(product.price);
                             product.store = store;
                             products.push(product);
                         });

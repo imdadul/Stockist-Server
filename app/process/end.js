@@ -47,9 +47,10 @@ module.exports = {
                             product.brand = getBrandName(name);
                             product.productName = name.replace(product.brand,"");
                             product.price = $(this).children('.price-box').children('.regular-price').children('.price').text();
-                            product.price=product.price.replace(",",'');
-                            product.price=product.price.replace("$",'');
-                            product.price = parseFloat(product.price);
+                            product.price = product.price.trim();
+                            //product.price=product.price.replace(",",'');
+                            //product.price=product.price.replace("$",'');
+                            //product.price = parseFloat(product.price);
                             product.store = store;
                             products.push(product);
                         });
