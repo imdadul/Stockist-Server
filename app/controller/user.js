@@ -2,8 +2,6 @@
  * Created by Imdadul Huq on 29-Sep-15.
  */
 
-
-
 exports.addToFavorite = function(req,res) {
     req.session.userID = req.body.oauthID;
     User.findOneAndUpdate(

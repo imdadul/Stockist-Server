@@ -3,6 +3,9 @@ var app = express();
 var bodyParser = require('body-parser')
 var CronJob = require('cron').CronJob;
 var session = require('express-session')
+var env = 'development';
+var config = require('./config/config')[env];
+
 
 app.use(session({
     secret: 'keyboard cat',
@@ -16,13 +19,10 @@ fs = require('fs'),
 mongoose = require('mongoose');
 
 
-
 // Bootstrap db connection
 // Connect to mongodb
 
 
-var env = 'development';
-var config = require('./config/config')[env];
 var connect = function () {
     var options = {server: {socketOptions: {keepAlive: 1}}};
     mongoose.connect(config.db, options)
